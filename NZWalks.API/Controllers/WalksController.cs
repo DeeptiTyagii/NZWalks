@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NZWalks.API.Domain.DTO;
+using NZWalks.API.Domain.Models;
+using NZWalks.API.Repositories;
 
 namespace NZWalks.API.Controllers
 {
@@ -8,5 +12,26 @@ namespace NZWalks.API.Controllers
     [ApiController]  //tells the app that this is api controller not mvc controller
     public class WalksController : ControllerBase
     {
+        private readonly IMapper _mapper;
+        private readonly IWalkRepository _walkRepository;
+
+        public WalksController(IMapper mapper, IWalkRepository walkRepository)
+        {
+            _mapper = mapper;
+            _walkRepository = walkRepository;
+        }
+
+        //CREATE WALKS
+        //POST : api/Walks
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] AddWalkRequestDto addWalkRequestDto)
+        {
+            //Map DTO to domain model
+            var walkDomainModel = _mapper.Map<Walk>(addWalkRequestDto);
+            await _walkRepository.CreateAsync(walkDomainModel);
+
+            //Map Domain model to DTO
+            return Ok(_mapper.Map<WalkDto>(walkDomainModel));
+        }
     }
 }
