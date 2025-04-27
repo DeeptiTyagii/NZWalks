@@ -96,7 +96,7 @@ namespace NZWalks.API.Controllers
 
             //Map domain to DTO
 
-            return Ok(deletedWalkDomainModel);
+            return Ok(_mapper.Map<WalkDto>(deletedWalkDomainModel));
         }
     }
 }
