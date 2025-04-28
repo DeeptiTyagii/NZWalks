@@ -78,21 +78,29 @@ namespace NZWalks.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] AddRegionRequestDto addRegionDto)
         {
-            //Map DTO to domain model
+            if (ModelState.IsValid)
+            {
+                //Map DTO to domain model
 
-            var regionDomainModel = _mapper.Map<Region>(addRegionDto);
+                var regionDomainModel = _mapper.Map<Region>(addRegionDto);
 
-            //Use Domain model to create region in dbcontext
+                //Use Domain model to create region in dbcontext
 
-            //await _dbContext.Regions.AddAsync(regionDomainModel);  //AddAsync
-            //await _dbContext.SaveChangesAsync();    //SaveChangesAsync - its important to save changes else it wont add the object to DB
+                //await _dbContext.Regions.AddAsync(regionDomainModel);  //AddAsync
+                //await _dbContext.SaveChangesAsync();    //SaveChangesAsync - its important to save changes else it wont add the object to DB
 
-            regionDomainModel = await _regionRepository.CreateAsync(regionDomainModel);
+                regionDomainModel = await _regionRepository.CreateAsync(regionDomainModel);
 
-            //map domain model back to DTO (cant send the domain model)
-            var regionDto = _mapper.Map<RegionDto>(regionDomainModel);
+                //map domain model back to DTO (cant send the domain model)
+                var regionDto = _mapper.Map<RegionDto>(regionDomainModel);
 
-            return CreatedAtAction(nameof(GetById), new { id = regionDto.Id }, regionDto);
+                return CreatedAtAction(nameof(GetById), new { id = regionDto.Id }, regionDto);
+            }
+            else
+            {
+                return BadRequest(ModelState);
+            }
+            
         }
 
         //UPDATE REGION
