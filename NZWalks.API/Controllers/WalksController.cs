@@ -36,7 +36,7 @@ namespace NZWalks.API.Controllers
                 return Ok(_mapper.Map<WalkDto>(walkDomainModel));
             }
             
-            return BadRequest();
+            return BadRequest(ModelState);
             
         }
 
@@ -88,7 +88,7 @@ namespace NZWalks.API.Controllers
 
                 return Ok(_mapper.Map<WalkDto>(walksDomainModel));
             }
-            return BadRequest();
+            return BadRequest(ModelState);
             
         }
 
