@@ -108,3 +108,6 @@ namespace NZWalks.API.Controllers
         }
     }
 }
+
+
+//gonna add authentication using JWT next
