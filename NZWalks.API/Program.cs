@@ -24,6 +24,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("NZWalksAuthConne
 
 builder.Services.AddScoped<IRegionRepository, RegionRepository>(); //from dbcontext (Sql)
 builder.Services.AddScoped<IWalkRepository, WalkRepository>(); 
+builder.Services.AddScoped<ITokenRepository, TokenRepository>(); 
 
 //builder.Services.AddScoped<IRegionRepository, InMemoryRegionRepository>(); //in case someone wants  to use something else other than
                                                                            //getting info from DB (say in memory)
