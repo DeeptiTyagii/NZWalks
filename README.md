@@ -44,6 +44,3 @@
 - `PUT /api/Walk/{id}`: Update an existing walk with the provided walk data.
 - `DELETE /api/Walk/{id}`: Delete a walk by its ID.
 
-### **ImageController**
-
-- `POST /api/Image/Upload`: Upload an image file for a walk. The image will be validated based on its extension and file signature.
