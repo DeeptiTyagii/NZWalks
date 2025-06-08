@@ -36,7 +36,7 @@
 - `PUT /api/Region/{id}`: Update an existing region with the provided region data.
 - `DELETE /api/Region/{id}`: Delete a region by its ID.
 
-### **WalkController**
+### **WalkController **
 
 - `GET /api/Walk`: Get a list of walks with optional filters and pagination.
 - `GET /api/Walk/{id}`: Get a specific walk by its ID.
